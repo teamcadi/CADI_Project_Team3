@@ -37,3 +37,4 @@ out/
 .vscode/
 
 application-datasource.yml
+application-oauth.yml

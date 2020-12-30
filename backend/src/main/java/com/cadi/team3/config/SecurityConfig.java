@@ -2,12 +2,10 @@ package com.cadi.team3.config;
 
 import com.cadi.team3.config.oAuth.PrincipalOAuth2UserService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @RequiredArgsConstructor
 @Configuration
@@ -23,10 +21,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .anyRequest()
                 .permitAll()
                 .and()
-                .formLogin()
-                .loginPage("/loginForm")
-                .loginProcessingUrl("/login")
-                .defaultSuccessUrl("/")
+                .logout()
+                .logoutSuccessUrl("/")
                 .and()
                 .oauth2Login()
                 .userInfoEndpoint()

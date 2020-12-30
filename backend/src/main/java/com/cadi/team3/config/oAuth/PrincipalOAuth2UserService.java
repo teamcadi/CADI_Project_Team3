@@ -13,6 +13,8 @@ import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @RequiredArgsConstructor
 @Service
 public class PrincipalOAuth2UserService extends DefaultOAuth2UserService {
@@ -39,9 +41,10 @@ public class PrincipalOAuth2UserService extends DefaultOAuth2UserService {
         String email = oAuth2UserInfo.getEmail();
         Role role = Role.ROLE_USER;
 
-        User userEntity = userRepository.findByUsername(username);
-        if(userEntity == null){
-            userEntity = new User().builder()
+        Optional<User> userOptional = userRepository.findByUsername(username);
+
+        if(!userOptional.isPresent()) {
+            User userEntity = new User().builder()
                     .username(username)
                     .providerId(providerId)
                     .nickname(nickname)
@@ -50,7 +53,6 @@ public class PrincipalOAuth2UserService extends DefaultOAuth2UserService {
                     .build();
             userRepository.save(userEntity);
         }
-
         return super.loadUser(userRequest);
     }
 }

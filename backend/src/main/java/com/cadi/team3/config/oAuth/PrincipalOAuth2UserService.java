@@ -1,5 +1,6 @@
 package com.cadi.team3.config.oAuth;
 
+import com.cadi.team3.config.oAuth.provider.FacebookUserInfo;
 import com.cadi.team3.config.oAuth.provider.GoogleUserInfo;
 import com.cadi.team3.config.oAuth.provider.OAuth2UserInfo;
 import com.cadi.team3.model.Role;
@@ -27,6 +28,9 @@ public class PrincipalOAuth2UserService extends DefaultOAuth2UserService {
 
         if(providerId.equals("google")){
             oAuth2UserInfo = new GoogleUserInfo(oAuth2User.getAttributes());
+        }
+        else if(providerId.equals("facebook")){
+            oAuth2UserInfo = new FacebookUserInfo(oAuth2User.getAttributes());
         }
 
         String provider = oAuth2UserInfo.getProvider();

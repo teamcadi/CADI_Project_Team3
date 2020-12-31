@@ -2,6 +2,7 @@ package com.cadi.team3.config.oAuth;
 
 import com.cadi.team3.config.oAuth.provider.FacebookUserInfo;
 import com.cadi.team3.config.oAuth.provider.GoogleUserInfo;
+import com.cadi.team3.config.oAuth.provider.NaverUserInfo;
 import com.cadi.team3.config.oAuth.provider.OAuth2UserInfo;
 import com.cadi.team3.model.Role;
 import com.cadi.team3.model.User;
@@ -13,6 +14,7 @@ import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
 
+import java.util.Map;
 import java.util.Optional;
 
 @RequiredArgsConstructor
@@ -33,6 +35,8 @@ public class PrincipalOAuth2UserService extends DefaultOAuth2UserService {
         }
         else if(providerId.equals("facebook")){
             oAuth2UserInfo = new FacebookUserInfo(oAuth2User.getAttributes());
+        }else if(providerId.equals("naver")){
+            oAuth2UserInfo = new NaverUserInfo((Map) oAuth2User.getAttributes().get("response"));
         }
 
         String provider = oAuth2UserInfo.getProvider();
@@ -40,6 +44,7 @@ public class PrincipalOAuth2UserService extends DefaultOAuth2UserService {
         String nickname = oAuth2UserInfo.getName();
         String email = oAuth2UserInfo.getEmail();
         Role role = Role.ROLE_USER;
+
 
         Optional<User> userOptional = userRepository.findByUsername(username);
 

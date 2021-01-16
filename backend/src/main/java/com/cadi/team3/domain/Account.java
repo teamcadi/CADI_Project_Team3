@@ -1,5 +1,6 @@
 package com.cadi.team3.domain;
 
+import com.cadi.team3.account.Role;
 import com.cadi.team3.config.BaseTimeEntity;
 import lombok.*;
 
@@ -9,7 +10,8 @@ import java.time.LocalDateTime;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode(of = "id")
+@EqualsAndHashCode(callSuper = false ,of = "id")
+
 @Entity
 @Builder
 public class Account extends BaseTimeEntity {

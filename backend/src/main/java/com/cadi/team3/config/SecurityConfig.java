@@ -12,20 +12,24 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    private final PrincipalOAuth2UserService principalOAuth2UserService;
+    //private final PrincipalOAuth2UserService principalOAuth2UserService;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable();
         http.authorizeRequests()
-                .anyRequest()
+                .mvcMatchers("/login")
                 .permitAll()
-                .and()
-                .logout()
-                .logoutSuccessUrl("/")
-                .and()
-                .oauth2Login()
-                .userInfoEndpoint()
-                .userService(principalOAuth2UserService);
+                .anyRequest().authenticated();
+
+
+                /*
+                *
+                * OAuth2 Login
+                * */
+//                .and()
+//                .oauth2Login()
+//                .userInfoEndpoint()
+//                .userService(principalOAuth2UserService);
     }
 }

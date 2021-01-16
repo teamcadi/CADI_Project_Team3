@@ -1,23 +1,27 @@
 package com.cadi.team3.account;
 
-import com.cadi.team3.domain.SignupDto;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 
+@RequiredArgsConstructor
 @RestController
 public class AccountController {
 
+    private final AccountService accountService;
 
     @PostMapping("/sign-up")
-    public void singUpRequest(@Valid SignupDto signupDto, Errors errors){
-        if(errors.hasErrors()){
-            // TODO 에러 처리
-        }
-
-        else return;  // TODO 회원가입 처리
+    public ResponseEntity<?> singUpRequest(@RequestBody @Valid SignupDto signupDto, Errors errors){
+        System.out.println(signupDto.getEmail());
+        System.out.println(signupDto.getPassword());
+        System.out.println(signupDto.getNickname());
+        return accountService.signUp(signupDto, errors);
     }
 
 }

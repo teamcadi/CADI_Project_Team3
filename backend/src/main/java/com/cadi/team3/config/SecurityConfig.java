@@ -18,7 +18,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable();
         http.authorizeRequests()
-                .mvcMatchers("/login")
+                .mvcMatchers("/","/sign-up","/login")
                 .permitAll()
                 .anyRequest().authenticated();
 

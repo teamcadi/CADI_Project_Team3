@@ -1,4 +1,4 @@
-package com.cadi.team3.domain;
+package com.cadi.team3.account;
 
 import lombok.Data;
 import org.hibernate.validator.constraints.Length;

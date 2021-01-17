@@ -1,8 +1,11 @@
 package com.cadi.team3.account;
 
+import com.cadi.team3.domain.Account;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ObjectError;
@@ -18,6 +21,7 @@ import java.util.List;
 public class AccountService {
 
     private final AccountRepository accountRepository;
+    private final JavaMailSender javaMailSender;
 
     private List<String> validCheck(SignupDto signupDto, Errors errors){
         List<String> errorList = new ArrayList<>();
@@ -43,9 +47,26 @@ public class AccountService {
 
         if(!errorList.isEmpty()) return new ResponseEntity<>(errorList,HttpStatus.CONFLICT);
 
-        // TODO AccountRepository로 회원 생성 구현
-        return new ResponseEntity<>("Account_Info",HttpStatus.CREATED);
+        Account account = Account.builder()
+                .nickname(dto.getNickname())
+                .email(dto.getEmail())
+                .password(dto.getPassword()) // TODO password Encoding
+                .role(Role.ROLE_USER)
+                .emailVerified(false)
+                .build();
 
+        accountRepository.save(account);
+
+        account.generateEmailCheckToken();
+        SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
+        simpleMailMessage.setTo(account.getEmail());
+        simpleMailMessage.setSubject("이메일 인증 확인");
+        simpleMailMessage.setText("/check-email-token?email="+account.getEmail()+"&token="+account.getEmailCheckToken());
+
+        javaMailSender.send(simpleMailMessage);
+
+
+        return new ResponseEntity<>(account,HttpStatus.CREATED);
 
     }
 

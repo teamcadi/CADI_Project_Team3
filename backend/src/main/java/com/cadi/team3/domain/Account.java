@@ -3,9 +3,11 @@ package com.cadi.team3.domain;
 import com.cadi.team3.account.Role;
 import com.cadi.team3.config.BaseTimeEntity;
 import lombok.*;
+import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Getter
 @AllArgsConstructor
@@ -26,19 +28,30 @@ public class Account extends BaseTimeEntity {
     @Column(unique = true)
      private String email;
 
+    @Column(nullable = false)
+    private String password;
+
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
      private Role role;
 
-    @Column(nullable = false)
-    private String providerId;
+//    private String providerId;
 
     private boolean emailVerified;
 
     private String emailCheckToken;
 
-    private LocalDateTime createTime;
+    private LocalDateTime registerTime;
 
+    public void setRegisterTime(LocalDateTime registerTime) {
+        this.registerTime = registerTime;
+    }
 
+    @CreatedDate
+    private LocalDateTime createdTime;
+
+    public void generateEmailCheckToken(){
+        this.emailCheckToken = UUID.randomUUID().toString();
+    }
 
 }

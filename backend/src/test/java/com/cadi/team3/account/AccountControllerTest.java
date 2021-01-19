@@ -2,7 +2,7 @@ package com.cadi.team3.account;
 
 import com.cadi.team3.domain.Account;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -117,4 +117,24 @@ class AccountControllerTest {
         perform.andExpect(status().is4xxClientError());
     }
 
+    @DisplayName("패스워드 인코딩 테스트")
+    @Test
+    public void password_enc_test() throws Exception{
+        //when
+        SignupDto signupDto = SignupDto.builder()
+                .nickname("testUser")
+                .password("12345678")
+                .email("testUser@test.com")
+                .build();
+
+        //given
+        mockMvc.perform(post("/sign-up")
+                .content(objectMapper.writeValueAsString(signupDto))
+                .contentType(MediaType.APPLICATION_JSON));
+
+        Account account = accountRepository.findByEmail("testUser@test.com");
+
+        //then
+        Assertions.assertNotEquals(account.getPassword(),"12345678");
+    }
 }

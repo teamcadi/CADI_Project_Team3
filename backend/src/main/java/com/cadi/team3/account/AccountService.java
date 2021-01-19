@@ -6,6 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ObjectError;
@@ -22,6 +23,7 @@ public class AccountService {
 
     private final AccountRepository accountRepository;
     private final JavaMailSender javaMailSender;
+    private final PasswordEncoder passwordEncoder;
 
     private List<String> validCheck(SignupDto signupDto, Errors errors){
         List<String> errorList = new ArrayList<>();
@@ -50,7 +52,7 @@ public class AccountService {
         Account account = Account.builder()
                 .nickname(dto.getNickname())
                 .email(dto.getEmail())
-                .password(dto.getPassword()) // TODO password Encoding
+                .password(passwordEncoder.encode(dto.getPassword()))
                 .role(Role.ROLE_USER)
                 .emailVerified(false)
                 .build();

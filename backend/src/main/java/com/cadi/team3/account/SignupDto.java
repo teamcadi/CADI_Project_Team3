@@ -16,7 +16,7 @@ public class SignupDto {
 
     @NotBlank
     @Length(min=3, max = 20)
-    @Pattern(regexp = "^[ㄱ-ㅎ가-힣a-z0-9_-]{3,20}$")
+    @Pattern(regexp = "^[ㄱ-ㅎ가-힣a-zA-Z0-9_-]{3,20}$")
     private String nickname;
 
     @NotBlank

@@ -1,0 +1,74 @@
+.container__top-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4rem;
+  background-color: rgba(0, 0, 0, 50%);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.top-bar__logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  height: 4rem;
+  width: auto;
+}
+.logo_img {
+  padding-left: 15px;
+  height: 4rem;
+  width: 3rem;
+  display: flex;
+  background: url('../img/ticket.png') no-repeat;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  background-position: center center;
+  background-size: cover;
+}
+.fa-ticket-alt {
+  padding-left: 5px;
+  font-size: 26px;
+  color: #8f148f52;
+}
+.logo_name {
+  padding-left: 5px;
+  font-size: 24px;
+  height: 4rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #eee5e9;
+  font-family: 'JetBrains Mono';
+}
+
+.nav_list {
+  display: flex;
+  padding-left: 0;
+  list-style: none;
+  color: #eee5e9;
+  font-size: 1rem;
+  font-family: 'JetBrains Mono';
+}
+
+.nav_list li {
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+.button__login {
+  padding-right: 10px;
+  /* height: 4rem;
+  width: 8rem; */
+  padding: 2rem 4rem;
+  display: flex;
+  background: url('../img/login.png') no-repeat;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  background-position: center center;
+  background-size: cover;
+}

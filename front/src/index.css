@@ -1,0 +1,20 @@
+body,
+html {
+  margin: 0;
+  height: 100%;
+  width: 100%;
+  font-size: 16px;
+}
+body {
+  /* header position : fixed 때문에 내릴라고*/
+  padding-top: 4rem;
+  height: calc(100% - 4rem);
+}
+a {
+  text-decoration: none;
+}
+
+#root {
+  height: 100%;
+  width: 100%;
+}

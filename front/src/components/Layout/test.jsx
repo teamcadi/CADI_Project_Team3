@@ -1,35 +1,28 @@
-/** 
- * @Author : chaeeun
- * @Date : 2021-01-21 05:09:32 
- * @Last Modified by: euncherry
- * @Last Modified time: 2021-01-24 06:59:37
- */
-import { Link } from "react-router-dom"
-import { React, useState } from 'react'
+import { Link, useHistory } from "react-router-dom"
+import React from 'react'
 import { Row, Col, Button, Modal } from 'antd'
 import styled from 'styled-components'
-import Account from '../Account/Container'
 
 
 const HeaderWrapper = styled.div`
     top : 0;
     left : 0;
     right : 0;
-    height : 5rem;
+    height : 4rem;
 
 `
 const Logo = styled.div`
 font-size: 1.5rem;
-height: 5rem;
+height: 4rem;
 display: flex;
-  justify-content: start;
+  justify-content: center;
   align-items: center;
   color: #383838;
   font-family: 'JetBrains Mono';
 
 `
 const NavList = styled.div`
-height : 5rem;
+height : 4rem;
 margin: 0;
 display: flex;
 justify-content: center;
@@ -40,41 +33,18 @@ cursor : pointer;
 `
 
 const LoginBtn = styled.div`
-height : 5rem;
+height : 4rem;
 display : flex;
-justify-content: flex-end;
+justify-content: center;
 align-items: center;
 `
-const Header = () => {
-    const [isModalVisible, setIsModalVisible] = useState(false);
-
-    const showModal = () => {
-        setIsModalVisible(true);
-    };
-
-    const handleOk = () => {
-        setIsModalVisible(false);
-    };
-
-    const handleCancel = () => {
-        setIsModalVisible(false);
-    };
-
-    const [isSignUp, setIsSignUp] = useState(false)
-
-
-    const handleSignUp = () => {
-        setIsSignUp(true)
-    }
-    const handleSignIn = () => {
-        setIsSignUp(false)
-    }
-
+const Test = () => {
+    const history = useHistory()
     return (
         <>
             <HeaderWrapper>
                 <Row justify="center">
-                    <Col span="18">
+                    <Col span="20">
                         <Row justify="space-between">
                             <Col span={3}>
                                 <Logo>Team 3</Logo>
@@ -82,7 +52,7 @@ const Header = () => {
                             <Col span={12}>
                                 <Row justify="space-around">
                                     <Col span={6}>
-                                        <Link to='/feed'>
+                                        <Link to='/Feed'>
                                             <NavList>Feed</NavList>
                                         </Link>
                                     </Col>
@@ -93,7 +63,7 @@ const Header = () => {
                                     </Col>
 
                                     <Col span={6}>
-                                        <Link to='/mypage'>
+                                        <Link to='/Mypage'>
                                             <NavList>My page</NavList>
                                         </Link>
                                     </Col>
@@ -102,13 +72,10 @@ const Header = () => {
                             </Col>
                             <Col span={4}>
                                 <LoginBtn>
-                                    <Button size="large" type="primary" shape="round" onClick={showModal}>Login</Button>
+                                    <Button size="large" type="primary" shape="round">Login</Button>
                                 </LoginBtn>
-                                <Modal title={isSignUp ? "회원가입이 필요합니다.🎯" : "로그인이 필요합니다.🎯"} visible={isModalVisible} onCancel={handleCancel}
-                                    footer={null} maskClosable={false}>
-                                    <Account isSignUp={isSignUp} handleSignUp={handleSignUp} handleSignIn={handleSignIn}></Account>
-                                </Modal>
                             </Col>
+
                         </Row>
                     </Col>
                 </Row>
@@ -120,4 +87,4 @@ const Header = () => {
 
 }
 
-export default Header;
+export default Test;

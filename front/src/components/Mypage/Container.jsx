@@ -5,7 +5,7 @@ const Container = () => {
     return (
         <>
             <Header></Header>
-            <div>Feed</div>
+            <div>Mypage</div>
         </>
     )
 

@@ -1,10 +1,8 @@
 .container__top-bar {
-  position: fixed;
   top: 0;
   left: 0;
   right: 0;
   height: 4rem;
-  background-color: rgba(0, 0, 0, 50%);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -41,11 +39,12 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  color: #eee5e9;
+  color: #383838;
   font-family: 'JetBrains Mono';
 }
 
 .nav_list {
+  margin: 0;
   display: flex;
   padding-left: 0;
   list-style: none;

@@ -6,6 +6,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.Errors;
@@ -67,8 +71,23 @@ public class AccountService {
 
         javaMailSender.send(simpleMailMessage);
 
+        accountLogin(account);
+
 
         return new ResponseEntity<>(account,HttpStatus.CREATED);
+
+    }
+
+    @Transactional
+    public void accountLogin(Account account){
+
+        SecurityContext securityContext = SecurityContextHolder.getContext();
+
+        UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(
+                new AccountPrincipal(account),
+                account.getPassword(),
+                com.sun.tools.javac.util.List.of((new SimpleGrantedAuthority(account.getRole().toString()))));
+        securityContext.setAuthentication(token);
 
     }
 

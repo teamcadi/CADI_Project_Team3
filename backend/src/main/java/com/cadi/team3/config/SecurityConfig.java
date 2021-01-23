@@ -3,6 +3,7 @@ package com.cadi.team3.config;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
@@ -16,15 +17,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable();
         http.authorizeRequests()
-                .mvcMatchers("/","/sign-up","/login","/get-account","/logout")
+                .mvcMatchers("/","/api/sign-up","/api/login","/api/get-account","/api/logout","/swagger-ui.html")
                 .permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
-                .loginPage("/login").permitAll()
+                .loginPage("/api/login").permitAll()
                 .and()
                 .logout()
-                .logoutUrl("/logout");
+                .logoutUrl("/api/logout");
 
                 /*
                 *
@@ -35,4 +36,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //                .userInfoEndpoint()
 //                .userService(principalOAuth2UserService);
     }
+
+    @Override
+    public void configure(WebSecurity web) throws Exception {
+        web.ignoring().antMatchers("/v2/api-docs/**");
+        web.ignoring().antMatchers("/swagger.json");
+        web.ignoring().antMatchers("/swagger-ui.html");
+        web.ignoring().antMatchers("/swagger-resources/**");
+        web.ignoring().antMatchers("/webjars/**");
+    }
+
 }

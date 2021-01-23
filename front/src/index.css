@@ -1,0 +1,23 @@
+@import '~antd/dist/antd.css';
+
+body,
+html {
+  margin: 0;
+  height: 100%;
+  width: 100%;
+  font-size: 16px;
+}
+body {
+  /* header position : fixed 때문에 내릴라고*/
+
+  height: calc(100% - 4rem);
+  background-color: rgb(248, 249, 250);
+}
+a {
+  text-decoration: none;
+}
+
+#root {
+  height: 100%;
+  width: 100%;
+}

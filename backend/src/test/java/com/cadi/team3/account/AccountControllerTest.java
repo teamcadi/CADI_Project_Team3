@@ -17,6 +17,8 @@ import org.springframework.test.web.servlet.ResultActions;
 
 import javax.transaction.Transactional;
 
+import static org.springframework.security.test.web.servlet.response.SecurityMockMvcResultMatchers.authenticated;
+import static org.springframework.security.test.web.servlet.response.SecurityMockMvcResultMatchers.unauthenticated;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -73,7 +75,7 @@ class AccountControllerTest {
         perform.andExpect(status().is4xxClientError());
     }
 
-    @DisplayName("가입 Valid 확인 #2 - 올바른 form 값인 경우")
+    @DisplayName("가입 Valid 확인 #2 - 올바른 form 값인 경우 & 로그인 확인")
     @Test
     public void sign_up_form_test2() throws Exception {
         //given
@@ -87,9 +89,9 @@ class AccountControllerTest {
         final ResultActions perform = mockMvc.perform(post("/sign-up")
                 .content(objectMapper.writeValueAsString(signupDto))
                 .contentType(MediaType.APPLICATION_JSON));
-
         //then
-        perform.andExpect(status().is2xxSuccessful());
+        perform.andExpect(status().is2xxSuccessful())
+        .andExpect(authenticated());
     }
 
     @Transactional
@@ -136,5 +138,27 @@ class AccountControllerTest {
 
         //then
         Assertions.assertNotEquals(account.getPassword(),"12345678");
+    }
+
+    @DisplayName("로그아웃 테스트")
+    @Test
+    public void logout_test() throws Exception{
+        //given
+        SignupDto signupDto = SignupDto.builder()
+                .nickname("testUser")
+                .password("12345678")
+                .email("testUser@test.com")
+                .build();
+
+                mockMvc.perform(post("/sign-up")
+                .content(objectMapper.writeValueAsString(signupDto))
+                .contentType(MediaType.APPLICATION_JSON));
+
+        //when
+        final ResultActions perform = mockMvc.perform(get("/logout"));
+
+        //then
+        perform.andExpect(unauthenticated());
+
     }
 }

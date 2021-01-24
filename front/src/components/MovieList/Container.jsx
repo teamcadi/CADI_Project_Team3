@@ -11,7 +11,8 @@ const Container = () => {
             <Row justify="center">
                 <Col span="18">
                     <Content style={{ padding: '2.5rem 0' }}>
-                        <p>
+                        <div>MovieList</div>
+                        {/* <p>
                             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed nonne merninisti licere mihi ista
                             probare, quae sunt a te dicta? Refert tamen, quo modo.
             </p>
@@ -24,7 +25,7 @@ const Container = () => {
                         <Button type="primary">
                             Reference open
                 </Button>
-                        <div>MovieList</div>
+                        <div>MovieList</div> */}
 
                     </Content>
                 </Col>

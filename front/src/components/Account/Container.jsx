@@ -5,19 +5,13 @@ import SignIn from './SignIn'
 import SignUp from "./SignUp"
 
 
-
+/**
+ * @param  isSignUp - signUp 버튼 클릭 시 true 
+ */
 
 const Container = ({ isSignUp, handleSignUp, handleSignIn }) => {
-    // signup버튼 클릭시 true
-    // const [isSignUp, setIsSignUp] = useState(false)
 
 
-    // const handleSignUp = () => {
-    //     setIsSignUp(true)
-    // }
-    // const handleSignIn = () => {
-    //     setIsSignUp(false)
-    // }
 
     return (
         <>

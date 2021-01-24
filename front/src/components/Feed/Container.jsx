@@ -1,11 +1,22 @@
 import React from "react"
 import Header from "../Layout/header"
+import { Divider, Button, Row, Col, Layout } from "antd";
+
+const { Content } = Layout
 
 const Container = () => {
     return (
         <>
             <Header></Header>
-            <div>Feed</div>
+            <Row justify="center">
+                <Col span="18">
+                    <Content style={{ padding: '2.5rem 0' }}>
+                        <div>Feed</div>
+
+                    </Content>
+                </Col>
+            </Row>
+
         </>
     )
 

@@ -2,7 +2,7 @@
  * @Author : chaeeun
  * @Date : 2021-01-21 05:09:32 
  * @Last Modified by: euncherry
- * @Last Modified time: 2021-01-24 06:59:37
+ * @Last Modified time: 2021-01-29 06:19:02
  */
 import { Link } from "react-router-dom"
 import { React, useState } from 'react'
@@ -105,7 +105,7 @@ const Header = () => {
                                     <Button size="large" type="primary" shape="round" onClick={showModal}>Login</Button>
                                 </LoginBtn>
                                 <Modal title={isSignUp ? "회원가입이 필요합니다.🎯" : "로그인이 필요합니다.🎯"} visible={isModalVisible} onCancel={handleCancel}
-                                    footer={null} maskClosable={false}>
+                                    footer={null} destroyOnClose={true} maskClosable={false}>
                                     <Account isSignUp={isSignUp} handleSignUp={handleSignUp} handleSignIn={handleSignIn}></Account>
                                 </Modal>
                             </Col>

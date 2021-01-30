@@ -4,9 +4,12 @@ import com.cadi.team3.account.Role;
 import com.cadi.team3.config.BaseTimeEntity;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.UUID;
 
 @Getter
@@ -52,6 +55,12 @@ public class Account extends BaseTimeEntity {
 
     public void generateEmailCheckToken(){
         this.emailCheckToken = UUID.randomUUID().toString();
+    }
+
+    public ArrayList<GrantedAuthority> getRoles(){
+        ArrayList<GrantedAuthority> grantedAuthorityList = new ArrayList<>();
+        grantedAuthorityList.add(new SimpleGrantedAuthority(role.toString()));
+        return grantedAuthorityList;
     }
 
 }

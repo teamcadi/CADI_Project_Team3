@@ -90,7 +90,7 @@ public class AccountService {
         UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(
                 new AccountPrincipal(account),
                 account.getPassword(),
-                grantedAuthorities);
+                account.getRoles());
         securityContext.setAuthentication(token);
     }
 

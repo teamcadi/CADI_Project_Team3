@@ -1,6 +1,6 @@
 import React from 'react'
-import { Form, Input, Button, Row, Col } from 'antd';
-
+import { Form, Input, Button, } from 'antd';
+import post_singup from "../../service/api/post/post_signup"
 
 const layout = {
     labelCol: {
@@ -20,22 +20,24 @@ const tailLayout = {
 const Demo = () => {
     const onFinish = (values) => {
         console.log('Success:', values);
-    };
+        const singupSet = Object.values(values);
+        const signupInfo = {
+            nickname: singupSet[0],
+            password: singupSet[1],
+            email: singupSet[2]
+        }
+        console.log(signupInfo)
+        post_singup(signupInfo)
+            .then((res) => {
+                console.log(res)
+            })
+            .catch((error) => console.log(error))
+    }
 
     const onFinishFailed = (errorInfo) => {
         console.log('Failed:', errorInfo);
     };
-    const validateMessages = {
-        required: '${label}을 입력해 주세요!',
-        types: {
-            email: '이메일형식이 아닙니다!'
 
-        },
-        nickname: {
-            range: '닉네임 길이는 ${min} 에서 ${max}입니다!',
-            pattern: '사용 할 수 없는 닉네임입니다!'
-        },
-    };
 
     return (
 
@@ -54,7 +56,7 @@ const Demo = () => {
                         message: "닉네임의 글자수는 3 - 20 입니다."
                     },
                     {
-                        pattern: /[ㄱ-ㅎ가-힣a-z0-9_-]{3,20}/,
+                        pattern: /[ㄱ-ㅎ가-힣a-z0-9_-]/,
                         message: "사용할수 없는 닉네임 형식입니다."
                     },
                     {

@@ -21,3 +21,24 @@ a {
   height: 100%;
   width: 100%;
 }
+
+@media screen and (max-width: 1024px) {
+  html,
+  body {
+    font-size: 14px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  html,
+  body {
+    font-size: 12px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  html,
+  body {
+    font-size: 10px;
+  }
+}

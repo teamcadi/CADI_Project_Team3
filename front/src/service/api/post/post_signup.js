@@ -9,8 +9,8 @@
 import _ from "../../../config/env"
 import {notification} from 'antd'
 
-const post_login = (data)=>{
-        return fetch(_.SERVER_URL + ":/api/login", {
+const post_signup = (data)=>{
+        return fetch(_.SERVER_URL + ":/api/signup", {
             method: 'POST',
             body: JSON.stringify(data),
         }).then((res)=> {
@@ -18,9 +18,9 @@ const post_login = (data)=>{
             if (!res.ok) throw res.json()
             if(res.ok){
                 notification['success'].open({
-                    message: 'login success',
+                    message: 'signup success',
                     description:
-                    `"nickname"님 어서오세요!`,
+                    `"nickname"님 환영합니다!`,
                     onClick: () => {
                     console.log('Notification Clicked!');
                     },
@@ -29,7 +29,7 @@ const post_login = (data)=>{
         }).catch(async(error)=>{
             let err =  await error.then()
             notification['warning'].open({
-                message: 'Error from post_login',
+                message: 'Error from post_signup',
                 description:
                 `${err.errorName} "${err.errorCode}"`,
                 onClick: () => {
@@ -44,4 +44,4 @@ const post_login = (data)=>{
     
 }
 
-export default post_login
+export default post_signup

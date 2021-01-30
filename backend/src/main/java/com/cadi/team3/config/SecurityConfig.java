@@ -15,7 +15,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.csrf().disable();
+        http.csrf().and().cors().disable();
         http.authorizeRequests()
                 .mvcMatchers("/","/api/sign-up","/api/login","/api/get-account","/api/logout","/swagger-ui.html")
                 .permitAll()

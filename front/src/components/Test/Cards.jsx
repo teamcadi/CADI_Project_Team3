@@ -1,21 +1,63 @@
 import styled from 'styled-components'
 import React from 'react'
+import { Row, Col } from 'antd'
 
-const CardComponent = styled.img`
-width : 200px;    
-height : 300px;
-src : '../../img/disney1.jpg' ;
-border : 1px solid black;
+
+
+const Card4 = styled.div`
+width: 13.75rem;
+height: 17.5rem;
+text-align: center;
+border: 3px dashed hotpink;
+background-color: blue;
+position: absolute;
+top: 8.125rem;
+left: 36.25rem;
+z-index: 7;
+opacity: 0.5;
+transform: rotate( -10deg );
+border-radius : 10px;
 `
 
+const CardAnt = styled.div`
+height : 17.5rem;
+border: 3px dashed hotpink;
+background-color: orange;
+transform: rotate( -10deg );
+border-radius : 10px;
+`
 
-const Cards = () => {
+const CardWrapper = styled.div`
+ height : 17.5rem;
+ top : ${props => (props.top)};
+ position: relative;
+ border: 3px dashed hotpink;
+ background-color: orange;
+ opacity: 0.5;
+ transform : rotate(${props => (props.rotate) || '8deg'} );
+ border-radius : 10px;
+`
+const CardContent = styled.div`
+
+    `
+
+const Cards = ({ top, span, offset, rotate }) => {
 
     return (
         <>
-            <CardComponent   >
+            {/* <Card4></Card4> */}
 
-            </CardComponent>
+
+            <Col span={span} offset={offset}>
+                <CardWrapper rotate={rotate} top={top}>
+                    <CardContent>
+
+                    </CardContent>
+                </CardWrapper>
+            </Col>
+
+
+
         </>
     )
 }

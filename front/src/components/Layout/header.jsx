@@ -2,7 +2,7 @@
  * @Author : chaeeun
  * @Date : 2021-01-21 05:09:32 
  * @Last Modified by: euncherry
- * @Last Modified time: 2021-01-29 06:19:02
+ * @Last Modified time: 2021-01-30 03:31:40
  */
 import { Link } from "react-router-dom"
 import { React, useState } from 'react'
@@ -16,7 +16,7 @@ const HeaderWrapper = styled.div`
     left : 0;
     right : 0;
     height : 5rem;
-
+    margin-bottom : 1.5rem ;
 `
 const Logo = styled.div`
 font-size: 1.5rem;

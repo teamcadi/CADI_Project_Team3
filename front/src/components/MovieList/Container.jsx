@@ -1,8 +1,19 @@
 import React from "react"
-import { Divider, Button, Row, Col, Layout } from "antd";
+import { Row, Col, Layout } from "antd";
 import Header from "../Layout/header"
-
+import styled from "styled-components"
+import img from "../../img/cardExample.png"
 const { Content } = Layout
+
+
+const TestImg = styled.div`
+    height : 40rem;
+    weight : 100%;
+    border : 1px solid black;
+    background-image: url(${img}) ;
+    background-repeat: no-repeat ;
+    background-size : 100% 100%;
+`
 
 const Container = () => {
     return (
@@ -10,22 +21,9 @@ const Container = () => {
             <Header></Header>
             <Row justify="center">
                 <Col span="18">
-                    <Content style={{ padding: '2.5rem 0' }}>
+                    <Content >
+                        <TestImg></TestImg>
                         <div>MovieList</div>
-                        {/* <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed nonne merninisti licere mihi ista
-                            probare, quae sunt a te dicta? Refert tamen, quo modo.
-            </p>
-                        <Divider />
-                        <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed nonne merninisti licere mihi ista
-                            probare, quae sunt a te dicta? Refert tamen, quo modo.
-            </p>
-                        <Button type="primary">Primary Button</Button>
-                        <Button type="primary">
-                            Reference open
-                </Button>
-                        <div>MovieList</div> */}
 
                     </Content>
                 </Col>

@@ -1,4 +1,4 @@
-package com.cadi.team3.model;
+package com.cadi.team3.config;
 
 import lombok.Getter;
 import org.springframework.data.annotation.CreatedDate;

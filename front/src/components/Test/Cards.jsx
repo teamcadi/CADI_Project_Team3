@@ -1,47 +1,41 @@
 import styled from 'styled-components'
 import React from 'react'
-import { Row, Col } from 'antd'
+import { Col } from 'antd'
 
 
-
-const Card4 = styled.div`
-width: 13.75rem;
-height: 17.5rem;
-text-align: center;
-border: 3px dashed hotpink;
-background-color: blue;
-position: absolute;
-top: 8.125rem;
-left: 36.25rem;
-z-index: 7;
-opacity: 0.5;
-transform: rotate( -10deg );
-border-radius : 10px;
-`
-
-const CardAnt = styled.div`
-height : 17.5rem;
-border: 3px dashed hotpink;
-background-color: orange;
-transform: rotate( -10deg );
-border-radius : 10px;
-`
 
 const CardWrapper = styled.div`
- height : 17.5rem;
- top : ${props => (props.top)};
+ height : 5rem;
+
  position: relative;
- border: 3px dashed hotpink;
- background-color: orange;
- opacity: 0.5;
- transform : rotate(${props => (props.rotate) || '8deg'} );
- border-radius : 10px;
+ top : ${props => (props.top)};
+ left : ${props => (props.left)}
 `
 const CardContent = styled.div`
 
+
+height : 17.5rem;
+border: 3px dashed hotpink;
+background-color: orange;
+opacity: 0.5;
+transform : rotate(${props => (props.rotate) || null} );
+border-radius : 10px;
+
+@media screen and (max-width: 1024px){
+   height : 14rem;
+}
+
+@media screen and (max-width: 768px){
+    height : 12rem;
+}
+
+@media screen and (max-width: 480px){
+    height : 9rem;
+}
+
     `
 
-const Cards = ({ top, span, offset, rotate }) => {
+const Cards = ({ top, left, span, offset, rotate }) => {
 
     return (
         <>
@@ -49,8 +43,8 @@ const Cards = ({ top, span, offset, rotate }) => {
 
 
             <Col span={span} offset={offset}>
-                <CardWrapper rotate={rotate} top={top}>
-                    <CardContent>
+                <CardWrapper top={top} left={left}>
+                    <CardContent rotate={rotate}>
 
                     </CardContent>
                 </CardWrapper>

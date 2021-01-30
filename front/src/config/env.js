@@ -1,7 +1,7 @@
 
 
-const z = {
+const env = {
     SERVER_URL : "http://localhost:5000",
     
 }
-export default z
+export default env

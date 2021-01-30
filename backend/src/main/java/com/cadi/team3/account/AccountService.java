@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -81,14 +82,16 @@ public class AccountService {
     @Transactional
     public void accountLogin(Account account){
 
+        List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
+        grantedAuthorities.add(new SimpleGrantedAuthority(account.getRole().toString()));
+
         SecurityContext securityContext = SecurityContextHolder.getContext();
 
         UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(
                 new AccountPrincipal(account),
                 account.getPassword(),
-                com.sun.tools.javac.util.List.of((new SimpleGrantedAuthority(account.getRole().toString()))));
+                grantedAuthorities);
         securityContext.setAuthentication(token);
-
     }
 
 }

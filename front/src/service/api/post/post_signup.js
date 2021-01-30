@@ -20,7 +20,7 @@ const post_signup = (data)=>{
             {
                 console.log(res)
             }
-            //throw res.json()
+            //throw res.json()+zz
             if(res.ok){
                 notification['success'].open({
                     message: 'signup success',

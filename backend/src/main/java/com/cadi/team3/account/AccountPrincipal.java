@@ -14,6 +14,7 @@ public class AccountPrincipal extends User {
         super(account.getEmail(),
                 account.getPassword(),
                 account.getRoles());
+        this.account = account;
     }
 
 

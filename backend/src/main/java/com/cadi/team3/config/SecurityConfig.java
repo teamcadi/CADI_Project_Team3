@@ -24,6 +24,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .logout()
                 .logoutUrl("/api/logout");
+        http.formLogin().loginProcessingUrl("/api/login").permitAll();
                 /*
                 *
                 * OAuth2 Login

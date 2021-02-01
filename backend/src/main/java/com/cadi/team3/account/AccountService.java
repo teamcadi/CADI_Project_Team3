@@ -11,12 +11,16 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ObjectError;
 
 import javax.transaction.Transactional;
+import java.nio.file.attribute.UserPrincipal;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -24,11 +28,15 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @Service
-public class AccountService {
+public class AccountService implements UserDetailsService {
 
     private final AccountRepository accountRepository;
     private final JavaMailSender javaMailSender;
     private final PasswordEncoder passwordEncoder;
+
+    public Account  findByUserEmail(LoginDto loginDto){
+        return accountRepository.findByEmail(loginDto.getUsername());
+    }
 
     private List<String> validCheck(SignupDto signupDto, Errors errors){
         List<String> errorList = new ArrayList<>();
@@ -94,4 +102,12 @@ public class AccountService {
         securityContext.setAuthentication(token);
     }
 
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        Account accountEntity = accountRepository.findByEmail(username);
+        System.out.println(accountEntity.getEmail());
+        System.out.println(accountEntity.getPassword());
+        if(accountEntity == null) throw new UsernameNotFoundException(username);
+        return new AccountPrincipal(accountEntity);
+    }
 }

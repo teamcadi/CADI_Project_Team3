@@ -15,18 +15,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.csrf().and().cors().disable();
+        http.csrf().disable();
+        http.cors().disable();
         http.authorizeRequests()
                 .mvcMatchers("/","/api/sign-up","/api/login","/api/get-account","/api/logout","/swagger-ui.html")
                 .permitAll()
                 .anyRequest().authenticated()
                 .and()
-                .formLogin()
-                .loginPage("/api/login").permitAll()
-                .and()
                 .logout()
                 .logoutUrl("/api/logout");
-
                 /*
                 *
                 * OAuth2 Login

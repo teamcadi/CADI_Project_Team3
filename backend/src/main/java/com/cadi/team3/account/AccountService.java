@@ -33,11 +33,7 @@ public class AccountService implements UserDetailsService {
     private final AccountRepository accountRepository;
     private final JavaMailSender javaMailSender;
     private final PasswordEncoder passwordEncoder;
-
-    public Account  findByUserEmail(LoginDto loginDto){
-        return accountRepository.findByEmail(loginDto.getUsername());
-    }
-
+    
     private List<String> validCheck(SignupDto signupDto, Errors errors){
         List<String> errorList = new ArrayList<>();
 

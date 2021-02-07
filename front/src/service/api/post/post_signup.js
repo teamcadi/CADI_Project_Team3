@@ -1,54 +1,48 @@
-/**
- * @description login 
+import {notification} from 'antd'
+import React from 'react'
+
+
+/** 
+ * @description sign up 
  * @method POST
  * @request @headers 
- * @request @body user{username(email정보) , password}
+ * @request @body user{user-nickname , user-name(email정보) , password}
  */
 
-
-import _ from "../../../config/env"
-import {notification} from 'antd'
-
 const post_signup = (data)=>{
+  let myHeaders = new Headers();
+  myHeaders.append("Content-Type", "application/json");
+  myHeaders.append("Cookie", "JSESSIONID=0826A04833E21DB11BDE30B188CF6191");
 
-        return( 
-            fetch(_.SERVER_URL + "/api/sign-up", {
-            method: 'POST',
-            body: data,
-        }).then((res)=> {
-            if (!res.ok) 
-            {
-                console.log(res)
-            }
-            //throw res.json()+zz
-            if(res.ok){
-                notification['success'].open({
-                    message: 'signup success',
-                    description:
-                    `"nickname"님 환영합니다!`,
-                    onClick: () => {
-                    console.log('Notification Clicked!');
-                    },
-                });
-            }
-        })
-        // .catch(async(error)=>{
-        //     let err =  await error.then()
-        //     // notification['warning'].open({
-        //     //     message: 'Error from post_signup',
-        //     //     description:
-        //     //     `${err.errorName} "${err.errorCode}"`,
-        //     //     onClick: () => {
-        //     //     console.log('Notification Clicked!');
-        //     //     },
-        //     // });
-        //     // console.log("Error from post_notice\n"+err.errorCode+"\n"+err.errorName)
-        //    console.log(err)
-        //     //에러처리
-        //     throw err
-        // })
-    //}
-        )
+      return( 
+          fetch("http://localhost:5000/api/sign-up", {
+            method : 'POST',
+            headers : myHeaders,
+            body : data
+          })
+         .then(res=>{
+          if(!res.ok) throw res.json()
+           console.log(res)
+           return res.json()
+         })
+          .catch(async(error) =>{
+              let err = await error.then()
+              console.log(`Error from sing-up \n ${err}`)
+             console.log(err)
+
+              err.forEach(err=>{
+                notification['error']({
+                  message : 'Error : 회원가입에 실패하였습니다.',
+                  description : `${err}`,
+                  onClick :  () =>{
+                    console.log("notification OnClick")
+                  }
+
+                })
+              })
+              throw err;
+          } )
+      )
 }
 
 export default post_signup

@@ -2,7 +2,7 @@
  * @Author : chaeeun
  * @Date : 2021-01-21 05:09:32 
  * @Last Modified by: euncherry
- * @Last Modified time: 2021-01-30 03:31:40
+ * @Last Modified time: 2021-02-02 11:24:01
  */
 import { Link } from "react-router-dom"
 import { React, useState } from 'react'
@@ -52,11 +52,7 @@ const Header = () => {
         setIsModalVisible(true);
     };
 
-    const handleOk = () => {
-        setIsModalVisible(false);
-    };
-
-    const handleCancel = () => {
+    const closeModal = () => {
         setIsModalVisible(false);
     };
 
@@ -104,9 +100,9 @@ const Header = () => {
                                 <LoginBtn>
                                     <Button size="large" type="primary" shape="round" onClick={showModal}>Login</Button>
                                 </LoginBtn>
-                                <Modal title={isSignUp ? "회원가입이 필요합니다.🎯" : "로그인이 필요합니다.🎯"} visible={isModalVisible} onCancel={handleCancel}
+                                <Modal title={isSignUp ? "회원가입이 필요합니다.🎯" : "로그인이 필요합니다.🎯"} visible={isModalVisible} onCancel={closeModal}
                                     footer={null} destroyOnClose={true} maskClosable={false}>
-                                    <Account isSignUp={isSignUp} handleSignUp={handleSignUp} handleSignIn={handleSignIn}></Account>
+                                    <Account isSignUp={isSignUp} handleSignUp={handleSignUp} handleSignIn={handleSignIn} closeModal={closeModal}></Account>
                                 </Modal>
                             </Col>
                         </Row>

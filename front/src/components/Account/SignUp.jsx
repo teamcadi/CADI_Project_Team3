@@ -1,6 +1,7 @@
 import React from 'react'
-import { Form, Input, Button, } from 'antd';
+import { Form, Input, Button, notification, Descriptions, } from 'antd';
 import post_singup from "../../service/api/post/post_signup"
+import signup_process from "../../service/transaction/signup_process"
 
 const layout = {
     labelCol: {
@@ -10,6 +11,7 @@ const layout = {
         span: 14,
     },
 };
+
 const tailLayout = {
     wrapperCol: {
         offset: 10,
@@ -17,21 +19,23 @@ const tailLayout = {
     },
 };
 
-const Demo = () => {
+
+const SignUp = (props) => {
     const onFinish = (values) => {
         console.log('Success:', values);
         const singupSet = Object.values(values);
         const signupInfo = JSON.stringify({
             "nickname": singupSet[0],
-            "password": singupSet[1],
-            "email": singupSet[2]
+            "email": singupSet[1],
+            "password": singupSet[2],
+
         })
+        const loginInfo = {
+            email: singupSet[1],
+            password: singupSet[2],
+        }
         console.log(signupInfo)
-        post_singup(signupInfo)
-            .then((res) => {
-                console.log(res)
-            })
-        // .catch((error) => console.log("error"))
+        signup_process(signupInfo, loginInfo)
     }
 
     const onFinishFailed = (errorInfo) => {
@@ -112,4 +116,4 @@ const Demo = () => {
     );
 };
 
-export default Demo;
+export default SignUp;

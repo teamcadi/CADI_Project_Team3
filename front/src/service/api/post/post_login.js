@@ -9,23 +9,30 @@
 import _ from "../../../config/env"
 import {notification} from 'antd'
 
-const post_login = (data)=>{
-        return fetch(_.SERVER_URL + ":/api/login", {
+const post_login = (loginInfo)=>{
+
+    let myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
+    myHeaders.append("Cookie", "JSESSIONID=D10CBF580D06DDC8698E162FBFF5EF28");
+    myHeaders.append("Access-Control-Allow-Origin", "*");
+  
+
+    let data =  new URLSearchParams();
+    data.append("username",`"${loginInfo.username}"`);
+    data.append("password",`"${loginInfo.password}"`);
+    console.log(loginInfo)
+    console.log(`"${loginInfo.username}"`)
+    console.log(`"${loginInfo.password}"`)
+    console.log("body dataa")
+    console.log(data);
+        return fetch(_.SERVER_URL + "/api/login", {
             method: 'POST',
-            body: JSON.stringify(data),
+            headers: myHeaders,
+            body:data,
         }).then((res)=> {
             if(res.status===500) throw Promise.resolve({errorCode: 500, errorName: "Server error"})
             if (!res.ok) throw res.json()
-            if(res.ok){
-                notification['success'].open({
-                    message: 'login success',
-                    description:
-                    `"nickname"님 어서오세요!`,
-                    onClick: () => {
-                    console.log('Notification Clicked!');
-                    },
-                });
-            }
+            return res.json()
         }).catch(async(error)=>{
             let err =  await error.then()
             notification['warning'].open({

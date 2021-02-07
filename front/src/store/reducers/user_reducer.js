@@ -1,17 +1,17 @@
-import ACTION from "../actions/auth_action"
+import ACTION from "../actions/user_action"
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default (state, action)=>{
-    if(state===undefined) { return { logined : false, loading: true}}
+    if(state===undefined) { return {}}
     switch(action.type){
         
-        case ACTION.LOGIN:
+        case ACTION.SET_USER:
             return {
-                ...state, logined: true
+                ...state, ...action.user
             }
-        case ACTION.LOGOUT:
+        case ACTION.DELETE_USER:
             return {
-                ...state, logined: false
+                
             }
         default:
             return { ...state }

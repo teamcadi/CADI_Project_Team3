@@ -19,7 +19,7 @@ const tailLayout = {
     },
 };
 
-const Demo = () => {
+const SignIn = () => {
     const onFinish = (values) => {
         console.log('Success:', values);
         const loginSet = Object.values(values);
@@ -91,4 +91,4 @@ const Demo = () => {
     );
 };
 
-export default Demo;
+export default SignIn;

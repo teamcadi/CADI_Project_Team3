@@ -1,15 +1,15 @@
 //Redux
 import React, { useState } from 'react'
 import { Button, Divider, Row, Col } from 'antd';
-import SignIn from './SignIn'
-import SignUp from "./SignUp"
+import SignIn from '../../containers/Account/SignIn'
+import SignUp from "../../containers/Account/SignUp"
 
 
 /**
  * @param  isSignUp - signUp 버튼 클릭 시 true 
  */
 
-const Container = ({ isSignUp, handleSignUp, handleSignIn }) => {
+const Container = ({ isSignUp, handleSignUp, handleSignIn, closeModal }) => {
 
 
 
@@ -20,7 +20,7 @@ const Container = ({ isSignUp, handleSignUp, handleSignIn }) => {
                     <>
                         {/* <div className = "SignBtn" onClick={handleSignIn} > SignIn</div> */}
 
-                        <SignUp></SignUp>
+                        <SignUp closeModal={closeModal}></SignUp>
                         <Divider>Have an account?</Divider>
                         <Row justify="center">
                             <Col span="24">

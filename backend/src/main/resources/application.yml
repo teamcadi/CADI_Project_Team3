@@ -10,7 +10,7 @@ server:
 
 spring:
   profiles:
-    include: datasource, oauth
+    include: datasource, oauth, key
 
   devtools:
     livereload:
